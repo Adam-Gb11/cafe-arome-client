@@ -7,19 +7,17 @@ import { MenuItem, Order } from '../models/models';
 export class ApiService {
 
   private http = inject(HttpClient);
-  private base = 'http://localhost:3000/api';
+  private apiUrl = 'https://cafe-arome-backend.onrender.com/api';
 
-  // récupérer le menu depuis MongoDB
   getMenu(): Observable<MenuItem[]> {
-    return this.http.get<MenuItem[]>(`${this.base}/menu`);
+    return this.http.get<MenuItem[]>(`${this.apiUrl}/menu`);
   }
 
-  // envoyer la commande vers MongoDB
   placeOrder(data: {
     tableNumber: number;
     items: { menuItemId: string; quantity: number }[];
     note: string;
   }): Observable<Order> {
-    return this.http.post<Order>(`${this.base}/orders`, data);
+    return this.http.post<Order>(`${this.apiUrl}/orders`, data);
   }
 }
