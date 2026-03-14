@@ -1,0 +1,26 @@
+<div class="success">
+
+  <!-- icône -->
+  <div class="success-ring">✓</div>
+
+  <!-- titre -->
+  <h2 class="success-h">Commande envoyée !</h2>
+
+  <!-- message -->
+  <p class="success-p">
+    Votre commande est en cours de préparation.<br>
+    Nous vous l'apportons dans quelques instants.
+  </p>
+
+  <!-- numéro de commande -->
+  <div class="order-token">
+    <div class="token-lbl">Numéro de commande</div>
+    <div class="token-val">{{ orderNumber() }}</div>
+  </div>
+
+  <!-- bouton nouvelle commande -->
+  <button class="again-btn" (click)="newOrder()">
+    + Nouvelle commande
+  </button>
+
+</div>

@@ -1,0 +1,61 @@
+<!-- Header -->
+<app-header [tableNumber]="tableNumber()"></app-header>
+
+<!-- Panier vide -->
+<div *ngIf="cart.isEmpty()" class="empty">
+  <div class="empty-icon">🛒</div>
+  <h2 class="empty-title">Panier vide</h2>
+  <p class="empty-sub">Ajoute des articles depuis le menu</p>
+  <button class="back-btn" (click)="goBack()">Voir le menu</button>
+</div>
+
+<!-- Panier -->
+<div *ngIf="!cart.isEmpty()" class="cart-wrap">
+
+  <div class="page-hdr">
+    <button class="back-btn" (click)="goBack()">← Retour</button>
+    <h2 class="page-title">Votre commande</h2>
+  </div>
+
+  <!-- articles -->
+  <ul class="cart-list">
+    <li *ngFor="let ci of cart.items()" class="cart-row">
+      <span class="cr-em">{{ ci.menuItem.emoji }}</span>
+      <div class="cr-info">
+        <div class="cr-name">{{ ci.menuItem.name }}</div>
+        <div class="cr-qty">× {{ ci.quantity }}</div>
+      </div>
+      <span class="cr-price">
+        {{ (ci.menuItem.price * ci.quantity).toFixed(2) }} TND
+      </span>
+    </li>
+  </ul>
+
+  <!-- total -->
+  <div class="cart-total">
+    <span>Total</span>
+    <span class="total-val">{{ cart.total().toFixed(2) }} TND</span>
+  </div>
+
+  <!-- note -->
+  <div class="note-wrap">
+    <label class="note-label">Note pour la cuisine</label>
+    <textarea
+      class="note-area"
+      [(ngModel)]="note"
+      rows="2"
+      placeholder="Allergies, sans sucre...">
+    </textarea>
+  </div>
+
+  <!-- erreur -->
+  <div *ngIf="error()" class="error-msg">⚠️ {{ error() }}</div>
+
+  <!-- confirmer -->
+  <button class="confirm-btn"
+          [disabled]="submitting()"
+          (click)="placeOrder()">
+    {{ submitting() ? 'Envoi en cours...' : '✅ Confirmer la commande' }}
+  </button>
+
+</div>
