@@ -70,6 +70,14 @@
     </ul>
   </section>
 </div>
+<!-- Bouton appeler serveur -->
+<div class="call-wrap">
+  <button class="call-btn"
+          [disabled]="calling()"
+          (click)="callServer()">
+    {{ callSent() ? '✅ Serveur appelé !' : calling() ? '...' : '🔔 Appeler le serveur' }}
+  </button>
+</div>
 
 <!-- Bouton flottant panier -->
 <div class="float-wrap" [class.visible]="!cart.isEmpty()">

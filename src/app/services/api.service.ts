@@ -29,4 +29,8 @@ submitReview(data: {
 }): Observable<any> {
   return this.http.post(`${this.apiUrl}/reviews`, data);
 }
+// ── Calls ──
+callServer(tableNumber: number): Observable<any> {
+  return this.http.post(`${this.apiUrl}/calls`, { tableNumber });
+}
 }

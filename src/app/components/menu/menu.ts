@@ -20,6 +20,8 @@ export class MenuComponent implements OnInit {
   private router = inject(Router);
   cart           = inject(CartService);
   lang           = inject(LanguageService);
+  calling        = signal(false);
+  callSent       = signal(false);
 
   tableNumber    = signal(1);
   allItems       = signal<MenuItem[]>([]);
@@ -75,6 +77,20 @@ export class MenuComponent implements OnInit {
   add(item: MenuItem)       { this.cart.add(item); }
   remove(id: string)        { this.cart.remove(id); }
   getQty(id: string)        { return this.cart.getQty(id); }
+  callServer() {
+  if (this.calling()) return;
+  this.calling.set(true);
+  this.api.callServer(this.tableNumber()).subscribe({
+    next: () => {
+      this.calling.set(false);
+      this.callSent.set(true);
+      setTimeout(() => this.callSent.set(false), 3000);
+    },
+    error: () => {
+      this.calling.set(false);
+    }
+  });
+}
 
   goToCart() {
     this.router.navigate(['/cart'], {
