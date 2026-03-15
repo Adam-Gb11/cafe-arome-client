@@ -110,3 +110,112 @@
   border-color: var(--gold-lo);
   color: var(--gold);
 }
+/* ── Review box ── */
+.review-box {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(200,169,110,0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.review-title {
+  font-size: 13px;
+  color: #9aa5c0;
+  letter-spacing: 0.5px;
+}
+
+/* ── Stars ── */
+.stars {
+  display: flex;
+  gap: 8px;
+}
+
+.star {
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: #2e2836;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1;
+}
+
+.star.active {
+  color: #c8a96e;
+  transform: scale(1.1);
+}
+
+.star:hover {
+  color: #e4c98a;
+  transform: scale(1.15);
+}
+
+/* ── Review input ── */
+.review-input {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid #20263a;
+  border-radius: 8px;
+  color: #dce4f5;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px 14px;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.review-input:focus {
+  border-color: #8c6e3f;
+}
+
+/* ── Review button ── */
+.review-btn {
+  width: 100%;
+  background: #c8a96e;
+  border: none;
+  color: #0a0c12;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.review-btn:hover:not(:disabled) {
+  background: #e4c98a;
+}
+
+.review-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Review done ── */
+.review-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px;
+}
+
+.done-icon {
+  font-size: 36px;
+}
+
+.done-text {
+  font-size: 14px;
+  color: #3dd68c;
+  letter-spacing: 1px;
+}

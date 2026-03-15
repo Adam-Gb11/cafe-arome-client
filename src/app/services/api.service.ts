@@ -20,4 +20,13 @@ export class ApiService {
   }): Observable<Order> {
     return this.http.post<Order>(`${this.apiUrl}/orders`, data);
   }
+  // ── Reviews ──
+submitReview(data: {
+  tableNumber: number;
+  orderNumber: string;
+  rating: number;
+  comment: string;
+}): Observable<any> {
+  return this.http.post(`${this.apiUrl}/reviews`, data);
+}
 }
