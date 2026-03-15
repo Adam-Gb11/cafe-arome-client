@@ -1,20 +1,20 @@
 <!-- Header -->
-<app-header [tableNumber]="tableNumber()"></app-header>
+<app-header></app-header>
 
 <!-- Panier vide -->
 <div *ngIf="cart.isEmpty()" class="empty">
   <div class="empty-icon">🛒</div>
-  <h2 class="empty-title">Panier vide</h2>
-  <p class="empty-sub">Ajoute des articles depuis le menu</p>
-  <button class="back-btn" (click)="goBack()">Voir le menu</button>
+  <h2 class="empty-title">{{ lang.t('cart') }}</h2>
+  <p class="empty-sub">{{ lang.t('empty_cart') }}</p>
+  <button class="back-btn" (click)="goBack()">← {{ lang.t('all') }}</button>
 </div>
 
 <!-- Panier -->
 <div *ngIf="!cart.isEmpty()" class="cart-wrap">
 
   <div class="page-hdr">
-    <button class="back-btn" (click)="goBack()">← Retour</button>
-    <h2 class="page-title">Votre commande</h2>
+    <button class="back-btn" (click)="goBack()">←</button>
+    <h2 class="page-title">{{ lang.t('cart') }}</h2>
   </div>
 
   <!-- articles -->
@@ -26,25 +26,25 @@
         <div class="cr-qty">× {{ ci.quantity }}</div>
       </div>
       <span class="cr-price">
-        {{ (ci.menuItem.price * ci.quantity).toFixed(2) }} TND
+        {{ (ci.menuItem.price * ci.quantity).toFixed(2) }} {{ lang.t('tnd') }}
       </span>
     </li>
   </ul>
 
   <!-- total -->
   <div class="cart-total">
-    <span>Total</span>
-    <span class="total-val">{{ cart.total().toFixed(2) }} TND</span>
+    <span>{{ lang.t('total') }}</span>
+    <span class="total-val">{{ cart.total().toFixed(2) }} {{ lang.t('tnd') }}</span>
   </div>
 
   <!-- note -->
   <div class="note-wrap">
-    <label class="note-label">Note pour la cuisine</label>
+    <label class="note-label">{{ lang.t('note') }}</label>
     <textarea
       class="note-area"
       [(ngModel)]="note"
       rows="2"
-      placeholder="Allergies, sans sucre...">
+      [placeholder]="lang.t('note')">
     </textarea>
   </div>
 
@@ -55,7 +55,7 @@
   <button class="confirm-btn"
           [disabled]="submitting()"
           (click)="placeOrder()">
-    {{ submitting() ? 'Envoi en cours...' : '✅ Confirmer la commande' }}
+    {{ submitting() ? lang.t('ordering') : '✅ ' + lang.t('order') }}
   </button>
 
 </div>

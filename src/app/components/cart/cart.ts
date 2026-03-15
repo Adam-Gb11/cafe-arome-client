@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
 import { ApiService } from '../../services/api.service';
+import { LanguageService } from '../../services/language';
 import { HeaderComponent } from '../header/header';
 
 @Component({
@@ -18,6 +19,7 @@ export class CartComponent {
   private route  = inject(ActivatedRoute);
   private api    = inject(ApiService);
   cart           = inject(CartService);
+  lang           = inject(LanguageService);
 
   tableNumber = signal(1);
   note        = '';

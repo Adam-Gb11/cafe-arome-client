@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { CartService } from '../../services/cart.service';
+import { LanguageService } from '../../services/language';
 import { MenuItem } from '../../models/models';
 import { HeaderComponent } from '../header/header';
 
@@ -14,38 +15,35 @@ import { HeaderComponent } from '../header/header';
   styleUrl: './menu.css'
 })
 export class MenuComponent implements OnInit {
-  private api   = inject(ApiService);
-  private route = inject(ActivatedRoute);
+  private api    = inject(ApiService);
+  private route  = inject(ActivatedRoute);
   private router = inject(Router);
-  cart          = inject(CartService);
+  cart           = inject(CartService);
+  lang           = inject(LanguageService);
 
   tableNumber    = signal(1);
   allItems       = signal<MenuItem[]>([]);
   activeCategory = signal('all');
   loading        = signal(true);
 
-  readonly categories = [
-    { id: 'all',        label: 'Tout' },
-    { id: 'cafe',       label: '☕ Cafés' },
-    { id: 'boisson',    label: '🥤 Boissons' },
-    { id: 'patisserie', label: '🥐 Pâtisseries' },
-    { id: 'plat',       label: '🍽️ Plats' },
-    { id: 'dessert',    label: '🍰 Desserts' },
-  ];
+  get categories() {
+    return [
+      { id: 'all',        label: this.lang.t('all') },
+      { id: 'cafe',       label: '☕ ' + this.lang.t('cafe') },
+      { id: 'boisson',    label: '🥤 ' + this.lang.t('boisson') },
+      { id: 'patisserie', label: '🥐 ' + this.lang.t('patisserie') },
+      { id: 'plat',       label: '🍽️ ' + this.lang.t('plat') },
+      { id: 'dessert',    label: '🍰 ' + this.lang.t('dessert') },
+    ];
+  }
 
-  readonly categoryLabels: Record<string, string> = {
-    cafe:       'Cafés & Boissons Chaudes',
-    boisson:    'Boissons Froides',
-    patisserie: 'Pâtisseries & Snacks',
-    plat:       'Plats',
-    dessert:    'Desserts',
-  };
-
-  readonly badgeLabels: Record<string, string> = {
-    popular: 'Populaire',
-    new:     'Nouveau',
-    chef:    'Signature'
-  };
+  get badgeLabels(): Record<string, string> {
+    return {
+      popular: this.lang.t('popular'),
+      new:     this.lang.t('new'),
+      chef:    this.lang.t('chef'),
+    };
+  }
 
   filteredItems = computed(() => {
     const cat   = this.activeCategory();
@@ -59,7 +57,7 @@ export class MenuComponent implements OnInit {
     const cats  = [...new Set(items.map(i => i.category))];
     return cats.map(c => ({
       category: c,
-      label:    this.categoryLabels[c] ?? c,
+      label:    c,
       items:    items.filter(i => i.category === c),
     }));
   });
