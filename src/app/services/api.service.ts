@@ -7,7 +7,7 @@ import { MenuItem, Order } from '../models/models';
 export class ApiService {
 
   private http = inject(HttpClient);
-  private apiUrl = 'https://cafe-arome-backend.onrender.com/api';
+  private apiUrl = 'https://afe-arome-backend-production.up.railway.app/api';
 
   getMenu(): Observable<MenuItem[]> {
     return this.http.get<MenuItem[]>(`${this.apiUrl}/menu`);
