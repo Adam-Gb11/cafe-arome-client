@@ -1,0 +1,58 @@
+<div class="success">
+
+  <!-- icône -->
+  <div class="success-ring">✓</div>
+
+  <!-- titre -->
+  <h2 class="success-h">{{ lang.t('success') }}</h2>
+
+  <!-- message -->
+  <p class="success-p">{{ lang.t('success_msg') }}</p>
+
+  <!-- numéro de commande -->
+  <div class="order-token">
+    <div class="token-lbl">{{ lang.t('order_num') }}</div>
+    <div class="token-val">{{ orderNumber() }}</div>
+  </div>
+
+  <!-- Formulaire avis -->
+  <div class="review-box" *ngIf="!submitted()">
+    <div class="review-title">Comment était votre expérience ?</div>
+
+    <!-- Étoiles -->
+    <div class="stars">
+      <button *ngFor="let n of [1,2,3,4,5]"
+              class="star"
+              [class.active]="n <= rating()"
+              (click)="setRating(n)">
+        ★
+      </button>
+    </div>
+
+    <!-- Commentaire -->
+    <textarea class="review-input"
+              [(ngModel)]="comment"
+              rows="2"
+              placeholder="Votre commentaire (optionnel)...">
+    </textarea>
+
+    <!-- Bouton envoyer -->
+    <button class="review-btn"
+            [disabled]="rating() === 0 || sending()"
+            (click)="submitReview()">
+      {{ sending() ? 'Envoi...' : 'Envoyer mon avis' }}
+    </button>
+  </div>
+
+  <!-- Avis envoyé -->
+  <div class="review-done" *ngIf="submitted()">
+    <div class="done-icon">🙏</div>
+    <div class="done-text">Merci pour votre avis !</div>
+  </div>
+
+  <!-- bouton nouvelle commande -->
+  <button class="again-btn" (click)="newOrder()">
+    + Nouvelle commande
+  </button>
+
+</div>

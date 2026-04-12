@@ -1,0 +1,30 @@
+<header class="hdr">
+  <div class="hdr-inner">
+
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-name">{{ lang.t('title') }}</div>
+      <div class="brand-tag">{{ lang.t('subtitle') }}</div>
+    </div>
+
+    <!-- Right -->
+    <div class="header-right">
+      <!-- Sélecteur de langue -->
+      <div class="lang-switcher">
+        <button *ngFor="let l of langs"
+                class="lang-btn"
+                [class.active]="lang.lang() === l.code"
+                (click)="setLang(l.code)">
+          {{ l.label }}
+        </button>
+      </div>
+
+      <!-- Table -->
+      <div class="table-chip">
+        <span class="chip-dot"></span>
+        <span class="chip-lbl">{{ lang.t('table') }} {{ tableNumber }}</span>
+      </div>
+    </div>
+
+  </div>
+</header>
