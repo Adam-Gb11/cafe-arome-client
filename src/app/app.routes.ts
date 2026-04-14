@@ -7,7 +7,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MenuComponent,
-    //canActivate: [WifiGuard]
+    canActivate: [WifiGuard]
   },
   {
     path: 'no-wifi',
